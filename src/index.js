@@ -1,13 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
 import App from './App';
+import LeafletMap from './components/LeafletMap'
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Routes>
+        {/* ルートパスでAppをレンダリング */}
+        <Route path="/" element={<App />} />
+        {/* /infoパスでInfoPageをレンダリング */}
+        <Route path="/leaflet" element={<LeafletMap />} />
+        {/* /farmer_app_testパスでAppをレンダリング */}
+        <Route path="/farmer_app_test" element={<App />} />
+      </Routes>
+    </Router>
   </React.StrictMode>
 );
 
