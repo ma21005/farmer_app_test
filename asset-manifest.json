@@ -1,16 +1,15 @@
 {
   "files": {
-    "main.css": "/farmer_app_test/static/css/main.f855e6bc.css",
-    "main.js": "/farmer_app_test/static/js/main.ceb98e6b.js",
+    "main.css": "/farmer_app_test/static/css/main.079856e6.css",
+    "main.js": "/farmer_app_test/static/js/main.6d2e06ee.js",
     "static/js/488.103417aa.chunk.js": "/farmer_app_test/static/js/488.103417aa.chunk.js",
-    "static/media/logo.svg": "/farmer_app_test/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/farmer_app_test/index.html",
-    "main.f855e6bc.css.map": "/farmer_app_test/static/css/main.f855e6bc.css.map",
-    "main.ceb98e6b.js.map": "/farmer_app_test/static/js/main.ceb98e6b.js.map",
+    "main.079856e6.css.map": "/farmer_app_test/static/css/main.079856e6.css.map",
+    "main.6d2e06ee.js.map": "/farmer_app_test/static/js/main.6d2e06ee.js.map",
     "488.103417aa.chunk.js.map": "/farmer_app_test/static/js/488.103417aa.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f855e6bc.css",
-    "static/js/main.ceb98e6b.js"
+    "static/css/main.079856e6.css",
+    "static/js/main.6d2e06ee.js"
   ]
 }
