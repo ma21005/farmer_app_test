@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import LeafletMap from './components/LeafletMap'
+import Weather from './components/Weather';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -12,11 +13,11 @@ root.render(
     <Router>
       <Routes>
         {/* ルートパスでAppをレンダリング */}
-        <Route path="/" element={<App />} />
+        <Route path="/farmer_app_test" element={<App />} />
         {/* /infoパスでInfoPageをレンダリング */}
         <Route path="/leaflet" element={<LeafletMap />} />
-        {/* /farmer_app_testパスでAppをレンダリング */}
-        <Route path="/farmer_app_test" element={<App />} />
+        {/* /infoパスでInfoPageをレンダリング */}
+        <Route path="/weather" element={<Weather />} />
       </Routes>
     </Router>
   </React.StrictMode>

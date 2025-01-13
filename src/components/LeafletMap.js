@@ -110,7 +110,7 @@ const LeafletMap = () => {
     <div>
       <div id="map" className="mt-24 mx-auto" style={{ height: '80vh', width: '80%' }} />
       <button
-        onClick={() => navigate('/')}
+        onClick={() => navigate('/farmer_app_test')}
         className="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-lg"
       >
         BACK
