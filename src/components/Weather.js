@@ -16,6 +16,7 @@ const Weather = () => {
         `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`
       );
 
+      console.log(response.data.list)
       setWeather(response.data.list);
     } catch (error) {
       console.error('Error has occurred:', error);
@@ -40,8 +41,15 @@ const Weather = () => {
                     {date.toLocaleDateString()} {date.toLocaleTimeString()}
                   </p>
                   <p>気温: {forecast.main.temp}°C</p>
+                  {/* <p>体感温度: {forecast.main.feels_like}°C</p> */}
+                  <p>最高気温: {forecast.main.temp_max}°C</p>
+                  <p>最低気温: {forecast.main.temp_min}°C</p>
+                  {/* <p>温度変化: {forecast.main.temp_kf}°C</p> */}
                   <p>天気: {forecast.weather[0].description}</p>
                   <p>湿度: {forecast.main.humidity}%</p>
+                  <p>気圧: {forecast.main.pressure}hPa</p>
+                  <p>地上気圧: {forecast.main.grnd_level}hPa</p>
+                  <p>海面気圧: {forecast.main.sea_level}hPa</p>
                   <p>風速: {forecast.wind.speed}m/s</p>
                   <p>降水量: {forecast.rain?.['3h'] ?? 0}mm</p>
                 </div>
