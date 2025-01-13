@@ -16,7 +16,6 @@ const Weather = () => {
         `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`
       );
 
-      console.log(response.data.list)
       setWeather(response.data.list);
     } catch (error) {
       console.error('Error has occurred:', error);
