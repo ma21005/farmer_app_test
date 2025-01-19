@@ -27,7 +27,9 @@ const Weather = () => {
   const fetchWeatherData = async (year) => {
     const url = `https://script.google.com/macros/s/AKfycby_vBGwQrziUi1lCJitrHaV1oPal4i-i4yZf4grh5n76y7WNAcPaP919DGTP54soTyf8Q/exec?year=${year}`;
     const response = await axios.get(url);
-    return response.data.map((entry) => ({
+    return response.data
+      .filter(entry => entry["年月日"].slice(5) !== "02-29") // 他の年のデータとの整合性を取るために2024/02/29を除外
+      .map((entry) => ({
       date: entry["年月日"].slice(5), // "YYYY-MM-DD" の "MM-DD" 部分を抽出
       avgTemp: parseFloat(entry["平均気温(℃)"]),
       maxTemp: parseFloat(entry["最高気温(℃)"]),
