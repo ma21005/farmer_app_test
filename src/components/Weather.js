@@ -33,8 +33,12 @@ const Weather = () => {
       maxTemp: parseFloat(entry["最高気温(℃)"]),
       minTemp: parseFloat(entry["最低気温(℃)"]),
       avgHumidity: parseFloat(entry["平均湿度(%)"]),
+      precipitation: parseFloat(entry["降水量の合計(mm)"]),
+      maxPrecipitation: parseFloat(entry["10分間降水量の最大(mm)"]),
+      avgWindSpeed: parseFloat(entry["平均風速(m/s)"]),
       maxWindSpeed: parseFloat(entry["最大風速(m/s)"]),
       maxGustSpeed: parseFloat(entry["最大瞬間風速(m/s)"]),
+      avgVaporPressure: parseFloat(entry["平均蒸気圧(hPa)"]),
       sunshineHours: parseFloat(entry["日照時間(時間)"]),
       totalSnowfall: parseFloat(entry["降雪量合計(cm)"]),
       maxSnowDepth: parseFloat(entry["最深積雪(cm)"])
@@ -83,8 +87,12 @@ const Weather = () => {
       entry[`maxTemp${year}`] = data[year]?.[i]?.maxTemp;
       entry[`minTemp${year}`] = data[year]?.[i]?.minTemp;
       entry[`avgHumidity${year}`] = data[year]?.[i]?.avgHumidity;
+      entry[`precipitation${year}`] = data[year]?.[i]?.precipitation;
+      entry[`maxPrecipitation${year}`] = data[year]?.[i]?.maxPrecipitation;
+      entry[`avgWindSpeed${year}`] = data[year]?.[i]?.avgWindSpeed;
       entry[`maxWindSpeed${year}`] = data[year]?.[i]?.maxWindSpeed;
       entry[`maxGustSpeed${year}`] = data[year]?.[i]?.maxGustSpeed;
+      entry[`avgVaporPressure${year}`] = data[year]?.[i]?.avgVaporPressure;
       entry[`sunshineHours${year}`] = data[year]?.[i]?.sunshineHours;
       entry[`totalSnowfall${year}`] = data[year]?.[i]?.totalSnowfall;
       entry[`maxSnowDepth${year}`] = data[year]?.[i]?.maxSnowDepth;
@@ -104,10 +112,14 @@ const Weather = () => {
   return (
     <div className="chart-container">
       {[
+        { title: '降水量の合計', dataKeyPrefix: 'precipitation', yAxisDomain: [0, 140], unit: 'mm' },
+        { title: '10分間の最大降水量', dataKeyPrefix: 'maxPrecipitation', yAxisDomain: [0, 50], unit: 'mm' },
         { title: '平均気温', dataKeyPrefix: 'avgTemp', yAxisDomain: [-10, 40], unit: '℃' },
         { title: '最高気温', dataKeyPrefix: 'maxTemp', yAxisDomain: [-10, 40], unit: '℃' },
         { title: '最低気温', dataKeyPrefix: 'minTemp', yAxisDomain: [-10, 40], unit: '℃' },
         { title: '平均湿度', dataKeyPrefix: 'avgHumidity', yAxisDomain: [0, 100], unit: '%' },
+        { title: '平均蒸気圧', dataKeyPrefix: 'avgVaporPressure', yAxisDomain: [0, 50], unit: 'hPa' },
+        { title: '平均風速', dataKeyPrefix: 'avgWindSpeed', yAxisDomain: [0, 10], unit: 'm/s' },
         { title: '最大風速', dataKeyPrefix: 'maxWindSpeed', yAxisDomain: [0, 20], unit: 'm/s' },
         { title: '最大瞬間風速', dataKeyPrefix: 'maxGustSpeed', yAxisDomain: [0, 30], unit: 'm/s' },
         { title: '日照時間', dataKeyPrefix: 'sunshineHours', yAxisDomain: [0, 15], unit: '時間' },
