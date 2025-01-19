@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import useWindowSize from "../hooks/useWindowSize";
 import { useNavigate } from 'react-router-dom';
-import TemperatureChart from "./TemperatureChart";
+import WeatherDataChart from "./WeatherDataChart";
 
 const Weather = () => {
   const navigate = useNavigate();
@@ -128,7 +128,7 @@ const Weather = () => {
         { title: '降雪量合計', dataKeyPrefix: 'totalSnowfall', yAxisDomain: [0, 50], unit: 'cm' },
         { title: '最深積雪', dataKeyPrefix: 'maxSnowDepth', yAxisDomain: [0, 80], unit: 'cm' }
       ].map((chart, index) => (
-        <TemperatureChart
+        <WeatherDataChart
           key={index}
           title={chart.title}
           dataKeyPrefix={chart.dataKeyPrefix}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 
-const TemperatureChart = ({
+const WeatherDataChart = ({
   title,
   dataKeyPrefix,
   combinedData,
@@ -68,4 +68,4 @@ const TemperatureChart = ({
   );
 };
 
-export default TemperatureChart;
+export default WeatherDataChart;
