@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import useWindowSize from "../hooks/useWindowSize";
 import { useNavigate } from 'react-router-dom';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
+import TemperatureChart from "./TemperatureChart";
 
 const Weather = () => {
   const navigate = useNavigate();
@@ -30,6 +30,8 @@ const Weather = () => {
     return response.data.map((entry) => ({
       date: entry["年月日"].slice(5), // "YYYY-MM-DD" の "MM-DD" 部分を抽出
       avgTemp: parseFloat(entry["平均気温(℃)"]),
+      maxTemp: parseFloat(entry["最高気温(℃)"]),
+      minTemp: parseFloat(entry["最低気温(℃)"])
     }));
   };
 
@@ -71,7 +73,9 @@ const Weather = () => {
   const combinedData = data[years[0]]?.map((d, i) => {
     const entry = { date: d.date };
     years.forEach(year => {
-      entry[`temp${year}`] = data[year]?.[i]?.avgTemp;
+      entry[`avgTemp${year}`] = data[year]?.[i]?.avgTemp;
+      entry[`maxTemp${year}`] = data[year]?.[i]?.maxTemp;
+      entry[`minTemp${year}`] = data[year]?.[i]?.minTemp;
     });
     return entry;
   }) || [];
@@ -87,55 +91,26 @@ const Weather = () => {
 
   return (
     <div className="chart-container">
-      <div className="border-2 m-4 rounded-3xl">
-        <h1 className="font-bold m-2 text-2xl">平均気温</h1>
-        <div style={{ display: 'flex', alignItems: 'flex-start' }}>
-          <div>
-            <LineChart width={windowSize.width * 0.9} height={400} data={combinedData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis
-                dataKey="date"
-                ticks={ticks}
-                domain={["01-01", "12-31"]}
-                allowDataOverflow={true}
-              />
-              <YAxis 
-                unit="℃"
-                domain={[-10, 30]}
-              />
-              <Tooltip />
-              <Legend />
-              {filteredYears.map((year) => (
-                <Line
-                  key={year}
-                  type="monotone"
-                  dataKey={`temp${year}`}
-                  name={`${year}年`}
-                  dot={false}
-                  stroke={yearAndColors[year]}
-                />
-              ))}
-            </LineChart>
-          </div>
-          <div style={{ width: windowSize.width * 0.05 }} className="ml-5">
-            {years.map(year => (
-              <div key={year} style={{ marginBottom: '10px' }}>
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={visibleYears[year]}
-                    onChange={() => handleYearToggle(year)}
-                    style={{ marginRight: '5px' }}
-                  />
-                  <span style={{ color: yearAndColors[year] }}>
-                    {year}年
-                  </span>
-                </label>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      {[
+        { title: '平均気温', dataKeyPrefix: 'avgTemp', yAxisDomain: [-10, 40] },
+        { title: '最高気温', dataKeyPrefix: 'maxTemp', yAxisDomain: [-10, 40] },
+        { title: '最低気温', dataKeyPrefix: 'minTemp', yAxisDomain: [-10, 40] }
+      ].map((chart, index) => (
+        <TemperatureChart
+          key={index}
+          title={chart.title}
+          dataKeyPrefix={chart.dataKeyPrefix}
+          combinedData={combinedData}
+          windowSize={windowSize}
+          ticks={ticks}
+          filteredYears={filteredYears}
+          yearAndColors={yearAndColors}
+          years={years}
+          visibleYears={visibleYears}
+          handleYearToggle={handleYearToggle}
+          yAxisDomain={chart.yAxisDomain}
+        />
+      ))}
       <button
         onClick={() => navigate('/farmer_app_test')}
         className="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-lg"
