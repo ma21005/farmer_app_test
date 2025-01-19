@@ -112,18 +112,18 @@ const Weather = () => {
   return (
     <div className="chart-container">
       {[
-        { title: '降水量の合計', dataKeyPrefix: 'precipitation', yAxisDomain: [0, 140], unit: 'mm' },
-        { title: '10分間の最大降水量', dataKeyPrefix: 'maxPrecipitation', yAxisDomain: [0, 50], unit: 'mm' },
+        { title: '合計降水量', dataKeyPrefix: 'precipitation', yAxisDomain: [0, 140], unit: 'mm' },
+        { title: '10分間の最大降水量', dataKeyPrefix: 'maxPrecipitation', yAxisDomain: [0, 25], unit: 'mm' },
         { title: '平均気温', dataKeyPrefix: 'avgTemp', yAxisDomain: [-10, 40], unit: '℃' },
         { title: '最高気温', dataKeyPrefix: 'maxTemp', yAxisDomain: [-10, 40], unit: '℃' },
         { title: '最低気温', dataKeyPrefix: 'minTemp', yAxisDomain: [-10, 40], unit: '℃' },
         { title: '平均湿度', dataKeyPrefix: 'avgHumidity', yAxisDomain: [0, 100], unit: '%' },
-        { title: '平均蒸気圧', dataKeyPrefix: 'avgVaporPressure', yAxisDomain: [0, 50], unit: 'hPa' },
-        { title: '平均風速', dataKeyPrefix: 'avgWindSpeed', yAxisDomain: [0, 10], unit: 'm/s' },
-        { title: '最大風速', dataKeyPrefix: 'maxWindSpeed', yAxisDomain: [0, 20], unit: 'm/s' },
-        { title: '最大瞬間風速', dataKeyPrefix: 'maxGustSpeed', yAxisDomain: [0, 30], unit: 'm/s' },
+        { title: '平均蒸気圧', dataKeyPrefix: 'avgVaporPressure', yAxisDomain: [0, 35], unit: 'hPa' },
+        { title: '平均風速', dataKeyPrefix: 'avgWindSpeed', yAxisDomain: [0, 5], unit: 'm/s' },
+        { title: '最大風速', dataKeyPrefix: 'maxWindSpeed', yAxisDomain: [0, 12], unit: 'm/s' },
+        { title: '最大瞬間風速', dataKeyPrefix: 'maxGustSpeed', yAxisDomain: [0, 25], unit: 'm/s' },
         { title: '日照時間', dataKeyPrefix: 'sunshineHours', yAxisDomain: [0, 15], unit: '時間' },
-        { title: '降雪量合計', dataKeyPrefix: 'totalSnowfall', yAxisDomain: [0, 40], unit: 'cm' },
+        { title: '降雪量合計', dataKeyPrefix: 'totalSnowfall', yAxisDomain: [0, 50], unit: 'cm' },
         { title: '最深積雪', dataKeyPrefix: 'maxSnowDepth', yAxisDomain: [0, 80], unit: 'cm' }
       ].map((chart, index) => (
         <TemperatureChart
