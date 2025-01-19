@@ -1,8 +1,11 @@
 import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
+import useWindowSize from "../hooks/useWindowSize";
+import { useNavigate } from 'react-router-dom';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 
 const Weather = () => {
+  const navigate = useNavigate();
   const yearAndColors = useMemo(() => ({
     2022: '#ccca45',
     2023: '#8884d8',
@@ -12,6 +15,13 @@ const Weather = () => {
   const years = useMemo(() => Object.keys(yearAndColors).map(Number), [yearAndColors]);
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
+  const windowSize = useWindowSize();
+  const [visibleYears, setVisibleYears] = useState(
+    years.reduce((acc, year) => {
+      acc[year] = true; // デフォルトで全て表示
+      return acc;
+    }, {})
+  );
 
   // APIからデータを取得する関数
   const fetchWeatherData = async (year) => {
@@ -66,31 +76,72 @@ const Weather = () => {
     return entry;
   }) || [];
 
+  const handleYearToggle = (year) => {
+    setVisibleYears(prev => ({
+      ...prev,
+      [year]: !prev[year]
+    }));
+  };
+
+  const filteredYears = years.filter(year => visibleYears[year]);
+
   return (
-    <div>
-      <h1>2022年～2025年の平均気温比較</h1>
-      <LineChart width={1600} height={400} data={combinedData}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis
-          dataKey="date"
-          ticks={ticks}
-          domain={["01-01", "12-31"]}
-          allowDataOverflow={true}
-        />
-        <YAxis unit="℃" />
-        <Tooltip />
-        <Legend />
-        {years.map((year, index) => (
-          <Line
-            key={year}
-            type="monotone"
-            dataKey={`temp${year}`}
-            name={`${year}年`}
-            dot={false}
-            stroke={yearAndColors[year]}
-          />
-        ))}
-      </LineChart>
+    <div className="chart-container">
+      <div className="border-2 m-4 rounded-3xl">
+        <h1 className="font-bold m-2 text-2xl">平均気温</h1>
+        <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+          <div>
+            <LineChart width={windowSize.width * 0.9} height={400} data={combinedData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis
+                dataKey="date"
+                ticks={ticks}
+                domain={["01-01", "12-31"]}
+                allowDataOverflow={true}
+              />
+              <YAxis 
+                unit="℃"
+                domain={[-10, 30]}
+              />
+              <Tooltip />
+              <Legend />
+              {filteredYears.map((year) => (
+                <Line
+                  key={year}
+                  type="monotone"
+                  dataKey={`temp${year}`}
+                  name={`${year}年`}
+                  dot={false}
+                  stroke={yearAndColors[year]}
+                />
+              ))}
+            </LineChart>
+          </div>
+          <div style={{ width: windowSize.width * 0.05 }} className="ml-5">
+            {years.map(year => (
+              <div key={year} style={{ marginBottom: '10px' }}>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={visibleYears[year]}
+                    onChange={() => handleYearToggle(year)}
+                    style={{ marginRight: '5px' }}
+                  />
+                  <span style={{ color: yearAndColors[year] }}>
+                    {year}年
+                  </span>
+                </label>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <button
+        onClick={() => navigate('/farmer_app_test')}
+        className="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-lg"
+      >
+        BACK
+      </button>
     </div>
   );
 };
