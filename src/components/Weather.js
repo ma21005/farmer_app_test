@@ -31,7 +31,13 @@ const Weather = () => {
       date: entry["年月日"].slice(5), // "YYYY-MM-DD" の "MM-DD" 部分を抽出
       avgTemp: parseFloat(entry["平均気温(℃)"]),
       maxTemp: parseFloat(entry["最高気温(℃)"]),
-      minTemp: parseFloat(entry["最低気温(℃)"])
+      minTemp: parseFloat(entry["最低気温(℃)"]),
+      avgHumidity: parseFloat(entry["平均湿度(%)"]),
+      maxWindSpeed: parseFloat(entry["最大風速(m/s)"]),
+      maxGustSpeed: parseFloat(entry["最大瞬間風速(m/s)"]),
+      sunshineHours: parseFloat(entry["日照時間(時間)"]),
+      totalSnowfall: parseFloat(entry["降雪量合計(cm)"]),
+      maxSnowDepth: parseFloat(entry["最深積雪(cm)"])
     }));
   };
 
@@ -76,6 +82,12 @@ const Weather = () => {
       entry[`avgTemp${year}`] = data[year]?.[i]?.avgTemp;
       entry[`maxTemp${year}`] = data[year]?.[i]?.maxTemp;
       entry[`minTemp${year}`] = data[year]?.[i]?.minTemp;
+      entry[`avgHumidity${year}`] = data[year]?.[i]?.avgHumidity;
+      entry[`maxWindSpeed${year}`] = data[year]?.[i]?.maxWindSpeed;
+      entry[`maxGustSpeed${year}`] = data[year]?.[i]?.maxGustSpeed;
+      entry[`sunshineHours${year}`] = data[year]?.[i]?.sunshineHours;
+      entry[`totalSnowfall${year}`] = data[year]?.[i]?.totalSnowfall;
+      entry[`maxSnowDepth${year}`] = data[year]?.[i]?.maxSnowDepth;
     });
     return entry;
   }) || [];
@@ -92,9 +104,15 @@ const Weather = () => {
   return (
     <div className="chart-container">
       {[
-        { title: '平均気温', dataKeyPrefix: 'avgTemp', yAxisDomain: [-10, 40] },
-        { title: '最高気温', dataKeyPrefix: 'maxTemp', yAxisDomain: [-10, 40] },
-        { title: '最低気温', dataKeyPrefix: 'minTemp', yAxisDomain: [-10, 40] }
+        { title: '平均気温', dataKeyPrefix: 'avgTemp', yAxisDomain: [-10, 40], unit: '℃' },
+        { title: '最高気温', dataKeyPrefix: 'maxTemp', yAxisDomain: [-10, 40], unit: '℃' },
+        { title: '最低気温', dataKeyPrefix: 'minTemp', yAxisDomain: [-10, 40], unit: '℃' },
+        { title: '平均湿度', dataKeyPrefix: 'avgHumidity', yAxisDomain: [0, 100], unit: '%' },
+        { title: '最大風速', dataKeyPrefix: 'maxWindSpeed', yAxisDomain: [0, 20], unit: 'm/s' },
+        { title: '最大瞬間風速', dataKeyPrefix: 'maxGustSpeed', yAxisDomain: [0, 30], unit: 'm/s' },
+        { title: '日照時間', dataKeyPrefix: 'sunshineHours', yAxisDomain: [0, 15], unit: '時間' },
+        { title: '降雪量合計', dataKeyPrefix: 'totalSnowfall', yAxisDomain: [0, 40], unit: 'cm' },
+        { title: '最深積雪', dataKeyPrefix: 'maxSnowDepth', yAxisDomain: [0, 80], unit: 'cm' }
       ].map((chart, index) => (
         <TemperatureChart
           key={index}
@@ -109,14 +127,17 @@ const Weather = () => {
           visibleYears={visibleYears}
           handleYearToggle={handleYearToggle}
           yAxisDomain={chart.yAxisDomain}
+          unit={chart.unit}
         />
       ))}
-      <button
-        onClick={() => navigate('/farmer_app_test')}
-        className="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-lg"
-      >
-        BACK
-      </button>
+      <div className="w-full flex justify-center mb-8">
+        <button
+          onClick={() => navigate('/farmer_app_test')}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-lg"
+        >
+          BACK
+        </button>
+      </div>
     </div>
   );
 };

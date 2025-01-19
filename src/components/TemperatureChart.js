@@ -12,7 +12,8 @@ const TemperatureChart = ({
   years,
   visibleYears,
   handleYearToggle,
-  yAxisDomain
+  yAxisDomain,
+  unit
 }) => {
   return (
     <div className="border-2 m-4 rounded-3xl">
@@ -28,7 +29,7 @@ const TemperatureChart = ({
               allowDataOverflow={true}
             />
             <YAxis 
-              unit="℃"
+              unit={unit}
               domain={yAxisDomain}
             />
             <Tooltip />
@@ -47,7 +48,7 @@ const TemperatureChart = ({
         </div>
         <div style={{ width: windowSize.width * 0.05 }} className="ml-5">
           {years.map(year => (
-            <div key={year} style={{ marginBottom: '10px' }}>
+            <div className="h-6" key={year} style={{ marginBottom: '10px' }}>
               <label>
                 <input
                   type="checkbox"
