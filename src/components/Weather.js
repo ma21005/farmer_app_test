@@ -1,64 +1,96 @@
+import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 
 const Weather = () => {
-  const apiKey = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
+  const yearAndColors = useMemo(() => ({
+    2022: '#ccca45',
+    2023: '#8884d8',
+    2024: '#82ca9d', 
+    2025: '#ff7300'
+  }), []);
+  const years = useMemo(() => Object.keys(yearAndColors).map(Number), [yearAndColors]);
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
 
-  // 緯度と経度の指定
-  const latitude = 35.08986398316492;
-  const longitude = 133.0407160749473;
-
-  const [weather, setWeather] = useState(null);
-
-  const apiCall = async () => {
-    try {
-      const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`
-      );
-
-      setWeather(response.data.list);
-    } catch (error) {
-      console.error('Error has occurred:', error);
-    }
+  // APIからデータを取得する関数
+  const fetchWeatherData = async (year) => {
+    const url = `https://script.google.com/macros/s/AKfycby_vBGwQrziUi1lCJitrHaV1oPal4i-i4yZf4grh5n76y7WNAcPaP919DGTP54soTyf8Q/exec?year=${year}`;
+    const response = await axios.get(url);
+    return response.data.map((entry) => ({
+      date: entry["年月日"].slice(5), // "YYYY-MM-DD" の "MM-DD" 部分を抽出
+      avgTemp: parseFloat(entry["平均気温(℃)"]),
+    }));
   };
 
   useEffect(() => {
-    apiCall(); // コンポーネントがマウントされたときに実行
-  }, []); // 空の依存配列で初回マウント時のみ実行
+    const loadData = async () => {
+      try {
+        const results = await Promise.all(
+          years.map(year => fetchWeatherData(year))
+        );
+        const newData = years.reduce((acc, year, index) => {
+          acc[year] = results[index];
+          return acc;
+        }, {});
+        setData(newData);
+      } catch (error) {
+        console.error("データの取得に失敗しました:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadData();
+  }, [years]);
+
+  if (loading) {
+    return <div>データを読み込み中...</div>;
+  }
+
+  // 各月の1日を生成（MM-DD形式）
+  const getMonthlyTicks = () => {
+    const months = [
+      "01", "02", "03", "04", "05", "06",
+      "07", "08", "09", "10", "11", "12",
+    ];
+    return months.map((month) => `${month}-01`);
+  };
+
+  const ticks = getMonthlyTicks();
+
+  const combinedData = data[years[0]]?.map((d, i) => {
+    const entry = { date: d.date };
+    years.forEach(year => {
+      entry[`temp${year}`] = data[year]?.[i]?.avgTemp;
+    });
+    return entry;
+  }) || [];
 
   return (
     <div>
-      {weather ? (
-        <div className="space-y-4">
-          <h2 className="text-xl font-bold mb-4">3時間ごとの天気予報</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {weather.map((forecast, index) => {
-              const date = new Date(forecast.dt * 1000);
-              return (
-                <div key={index} className="p-4 border rounded-lg shadow-sm">
-                  <p className="font-semibold">
-                    {date.toLocaleDateString()} {date.toLocaleTimeString()}
-                  </p>
-                  <p>気温: {forecast.main.temp}°C</p>
-                  {/* <p>体感温度: {forecast.main.feels_like}°C</p> */}
-                  <p>最高気温: {forecast.main.temp_max}°C</p>
-                  <p>最低気温: {forecast.main.temp_min}°C</p>
-                  {/* <p>温度変化: {forecast.main.temp_kf}°C</p> */}
-                  <p>天気: {forecast.weather[0].description}</p>
-                  <p>湿度: {forecast.main.humidity}%</p>
-                  <p>気圧: {forecast.main.pressure}hPa</p>
-                  <p>地上気圧: {forecast.main.grnd_level}hPa</p>
-                  <p>海面気圧: {forecast.main.sea_level}hPa</p>
-                  <p>風速: {forecast.wind.speed}m/s</p>
-                  <p>降水量: {forecast.rain?.['3h'] ?? 0}mm</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      ) : (
-        <p>天気データを読み込み中...</p>
-      )}
+      <h1>2022年～2025年の平均気温比較</h1>
+      <LineChart width={1600} height={400} data={combinedData}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis
+          dataKey="date"
+          ticks={ticks}
+          domain={["01-01", "12-31"]}
+          allowDataOverflow={true}
+        />
+        <YAxis unit="℃" />
+        <Tooltip />
+        <Legend />
+        {years.map((year, index) => (
+          <Line
+            key={year}
+            type="monotone"
+            dataKey={`temp${year}`}
+            name={`${year}年`}
+            dot={false}
+            stroke={yearAndColors[year]}
+          />
+        ))}
+      </LineChart>
     </div>
   );
 };
