@@ -1,19 +1,22 @@
 import './App.css';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 function App() {
   const navigate = useNavigate();
 
   const handleLeafletClick = () => {
-    navigate("/leaflet");
+    navigate('/leaflet');
   };
 
   const handleWeatherClick = () => {
-    navigate("/weather");
+    navigate('/weather');
   };
 
   return (
-    <div className="App flex justify-center items-center" style={{ backgroundColor: 'white', minHeight: '100vh' }}>
+    <div
+      className="App flex justify-center items-center"
+      style={{ backgroundColor: 'white', minHeight: '100vh' }}
+    >
       <div className="flex flex-col justify-center items-center">
         <button
           onClick={handleLeafletClick}

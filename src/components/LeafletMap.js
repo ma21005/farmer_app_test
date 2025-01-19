@@ -13,18 +13,24 @@ const LeafletMap = () => {
     });
 
     // タイルレイヤーを追加（衛星写真）
-    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-      attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
-      maxZoom: 18,
-    }).addTo(map);
+    L.tileLayer(
+      'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      {
+        attribution:
+          'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+        maxZoom: 18,
+      }
+    ).addTo(map);
 
     // 赤色のカスタムアイコンを作成
     const customIcon = L.icon({
-      iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-red.png',
+      iconUrl:
+        'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-red.png',
       iconSize: [25, 41], // アイコンのサイズ
       iconAnchor: [12.5, 41], // アイコンのアンカー（位置）
       popupAnchor: [0, -32], // ポップアップのアンカー（位置）
-      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+      shadowUrl:
+        'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
       shadowSize: [41, 41], // 影のサイズ
     });
 
@@ -73,7 +79,7 @@ const LeafletMap = () => {
           [35.089267016771814, 133.04003443044797],
           [35.0895172164538, 133.04027059074696],
           [35.0894908796813, 133.04032426354217],
-          [35.08938114303774, 133.04038330361695]
+          [35.08938114303774, 133.04038330361695],
         ],
       },
     ];
@@ -108,7 +114,11 @@ const LeafletMap = () => {
 
   return (
     <div>
-      <div id="map" className="mt-24 mx-auto" style={{ height: '80vh', width: '80%' }} />
+      <div
+        id="map"
+        className="mt-24 mx-auto"
+        style={{ height: '80vh', width: '80%' }}
+      />
       <button
         onClick={() => navigate('/farmer_app_test')}
         className="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-lg"

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
 import App from './App';
-import LeafletMap from './components/LeafletMap'
+import LeafletMap from './components/LeafletMap';
 import Weather from './components/Weather';
 import reportWebVitals from './reportWebVitals';
 
