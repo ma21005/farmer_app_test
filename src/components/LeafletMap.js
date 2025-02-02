@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
+// 田んぼの表面積の計算に使用
+import * as turf from '@turf/turf';
+
 const LeafletMap = () => {
   useEffect(() => {
     // 地図を初期化（初期ズームを18にして最大ズームも18に制限）
@@ -84,8 +87,19 @@ const LeafletMap = () => {
       },
     ];
 
+    // 面積を計算する関数（平方メートル）
+    const calculateArea = (coords) => {
+      // 面積を計算するために最初の座標を最後に追加
+      const closedCoords = [...coords, coords[0]];
+
+      const polygon = turf.polygon([closedCoords]);
+      const area = turf.area(polygon);
+      return area.toFixed(2); // 小数点2桁まで表示
+    };
+
     // 各田んぼをループしてポリゴンを描画
     riceFields.forEach((field) => {
+      const area = calculateArea(field.coords); // 面積を計算
       const polygon = L.polygon(field.coords, {
         color: 'orange',
         fillColor: 'orange',
@@ -93,7 +107,7 @@ const LeafletMap = () => {
       }).addTo(map);
 
       // ポリゴンにポップアップを追加
-      polygon.bindPopup(field.name);
+      polygon.bindPopup(`${field.name}<br>面積: ${area} m²`);
     });
 
     // 地図クリックイベント
