@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/farmer_app_test/static/css/main.0776f9d1.css",
-    "main.js": "/farmer_app_test/static/js/main.7ef24511.js",
+    "main.js": "/farmer_app_test/static/js/main.5180abc4.js",
     "static/js/488.9e6ea7b4.chunk.js": "/farmer_app_test/static/js/488.9e6ea7b4.chunk.js",
     "index.html": "/farmer_app_test/index.html",
     "main.0776f9d1.css.map": "/farmer_app_test/static/css/main.0776f9d1.css.map",
-    "main.7ef24511.js.map": "/farmer_app_test/static/js/main.7ef24511.js.map",
+    "main.5180abc4.js.map": "/farmer_app_test/static/js/main.5180abc4.js.map",
     "488.9e6ea7b4.chunk.js.map": "/farmer_app_test/static/js/488.9e6ea7b4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0776f9d1.css",
-    "static/js/main.7ef24511.js"
+    "static/js/main.5180abc4.js"
   ]
 }
