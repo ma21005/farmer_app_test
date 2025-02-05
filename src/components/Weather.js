@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
-import useWindowSize from '../hooks/useWindowSize';
 import { useNavigate } from 'react-router-dom';
 import WeatherDataChart from './WeatherDataChart';
 
@@ -21,7 +20,6 @@ const Weather = () => {
   );
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
-  const windowSize = useWindowSize();
   const [visibleYears, setVisibleYears] = useState(
     years.reduce((acc, year) => {
       acc[year] = true; // デフォルトで全て表示
@@ -215,7 +213,6 @@ const Weather = () => {
           title={chart.title}
           dataKeyPrefix={chart.dataKeyPrefix}
           combinedData={combinedData}
-          windowSize={windowSize}
           ticks={ticks}
           filteredYears={filteredYears}
           yearAndColors={yearAndColors}
