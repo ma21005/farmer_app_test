@@ -10,12 +10,7 @@ function App() {
 
   return (
     <div className="wrapper">
-      <div
-        className="content-wrapper d-flex align-items-center justify-content-center"
-        style={{ minHeight: '100vh' }}
-      >
-        <p>HOME</p>
-      </div>
+      <p>HOME</p>
     </div>
   );
 }

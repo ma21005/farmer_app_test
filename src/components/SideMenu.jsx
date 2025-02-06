@@ -9,9 +9,12 @@ const SideMenu = () => {
       {/* サイドメニュー */}
       <aside className="bg-gray-800 text-white w-64 h-full flex-shrink-0">
         <div className="p-4">
-          <a href="#" className="text-lg font-semibold block mb-4">
+          <button
+            className="text-lg font-semibold block mb-4"
+            onClick={() => navigate('/farmer_app_test')}
+          >
             My Dashboard
-          </a>
+          </button>
         </div>
         <nav>
           <ul className="space-y-2">
@@ -36,7 +39,7 @@ const SideMenu = () => {
       </aside>
 
       {/* メインコンテンツ */}
-      <div className="flex-1 overflow-auto">
+      <div className="flex-1 bg-[#f0efef] overflow-auto">
         <Outlet />
       </div>
     </div>

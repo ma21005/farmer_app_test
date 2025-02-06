@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import WeatherDataChart from './WeatherDataChart';
 
-const Weather = () => {
+const WeatherPage = () => {
   const navigate = useNavigate();
   const yearAndColors = useMemo(
     () => ({
@@ -235,4 +235,4 @@ const Weather = () => {
   );
 };
 
-export default Weather;
+export default WeatherPage;

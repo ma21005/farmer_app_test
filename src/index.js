@@ -5,7 +5,7 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import LeafletMap from './components/LeafletMap';
-import Weather from './components/Weather';
+import WeatherPage from './components/WeatherPage';
 import SideMenu from './components/SideMenu';
 import reportWebVitals from './reportWebVitals';
 
@@ -18,7 +18,7 @@ root.render(
           {/* サイドメニューが共通表示されるルート */}
           <Route path="farmer_app_test" element={<App />} />
           <Route path="leaflet" element={<LeafletMap />} />
-          <Route path="weather" element={<Weather />} />
+          <Route path="weather" element={<WeatherPage />} />
         </Route>
       </Routes>
     </Router>
