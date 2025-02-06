@@ -24,7 +24,7 @@ const WeatherPage = () => {
   const [loading, setLoading] = useState(true);
   const [visibleYears, setVisibleYears] = useState(
     years.reduce((acc, year) => {
-      acc[year] = true; // デフォルトで全て表示
+      acc[year] = year === 2024 || year === 2025; // デフォルトで2024と2025のみ表示
       return acc;
     }, {})
   );
