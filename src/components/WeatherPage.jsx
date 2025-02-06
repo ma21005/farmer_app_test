@@ -7,6 +7,8 @@ const WeatherPage = () => {
   const navigate = useNavigate();
   const yearAndColors = useMemo(
     () => ({
+      2020: '#fc9cb8',
+      2021: '#4682b4',
       2022: '#ccca45',
       2023: '#8884d8',
       2024: '#82ca9d',
