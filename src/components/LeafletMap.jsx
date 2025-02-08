@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -124,8 +123,6 @@ const LeafletMap = () => {
     };
   }, []);
 
-  const navigate = useNavigate();
-
   return (
     <div>
       <div
@@ -133,12 +130,6 @@ const LeafletMap = () => {
         className="mt-24 mx-auto"
         style={{ height: '80vh', width: '80%' }}
       />
-      <button
-        onClick={() => navigate('/farmer_app_test')}
-        className="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-lg"
-      >
-        BACK
-      </button>
     </div>
   );
 };

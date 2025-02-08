@@ -1,10 +1,8 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import WeatherDataChart from './WeatherDataChart';
 
 const WeatherPage = () => {
-  const navigate = useNavigate();
   const yearAndColors = useMemo(
     () => ({
       2020: '#fc9cb8',
@@ -222,14 +220,6 @@ const WeatherPage = () => {
           loading={loading}
         />
       ))}
-      <div className="w-full flex justify-center mb-8">
-        <button
-          onClick={() => navigate('/farmer_app_test')}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-lg"
-        >
-          BACK
-        </button>
-      </div>
     </div>
   );
 };
