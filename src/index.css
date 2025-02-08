@@ -17,6 +17,10 @@ code {
     monospace;
 }
 
+/* AdminLTEのクラスの背景色をオーバーライド */
 .sidebar-dark-primary {
   background-color: #1f2937 !important;
+}
+.content-wrapper {
+  background-color: #ededee !important;
 }

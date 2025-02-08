@@ -43,7 +43,7 @@ const SideMenu = () => {
       </aside>
 
       {/* メインコンテンツ */}
-      <div className="content-wrapper flex-1 bg-[#f0efef] overflow-auto">
+      <div className="content-wrapper flex-1 overflow-auto">
         <Outlet />
       </div>
     </div>
