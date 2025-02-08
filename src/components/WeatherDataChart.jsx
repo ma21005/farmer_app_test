@@ -24,8 +24,27 @@ const WeatherDataChart = ({
 }) => {
   return (
     <div className="card card-info elevation-2 relative w-auto max-w-full border-2 mr-4 ml-5 mt-4 mb-4">
-      <div className="card-header">
+      <div className="card-header flex justify-between">
         <h1 className="font-bold m-1 text-2xl">{title}</h1>
+
+        {/* 気象データの表示範囲を切り替えるボタン */}
+        <div
+          className="btn-group rounded-md ml-auto border-2 border-[#148CA0]"
+          role="group"
+        >
+          <button type="button" className="btn btn-info">
+            1 ~ 12月
+          </button>
+          <button type="button" className="btn btn-info">
+            1 ~ 4月
+          </button>
+          <button type="button" className="btn btn-info">
+            5 ~ 8月
+          </button>
+          <button type="button" className="btn btn-info">
+            9 ~ 12月
+          </button>
+        </div>
       </div>
 
       <div className="card-body w-full flex justify-between items-start">
