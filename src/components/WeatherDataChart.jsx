@@ -23,7 +23,7 @@ const WeatherDataChart = ({
   loading,
 }) => {
   return (
-    <div className="card card-info relative w-auto max-w-full border-2 mr-4 ml-5 mt-4 mb-4">
+    <div className="card card-info elevation-2 relative w-auto max-w-full border-2 mr-4 ml-5 mt-4 mb-4">
       <div className="card-header">
         <h1 className="font-bold m-1 text-2xl">{title}</h1>
       </div>
