@@ -70,16 +70,18 @@ const WeatherDataChart = ({
           </div>
           <div className="w-[9%] 2xl:w-[6%] flex flex-col items-center">
             {years.map((year) => (
-              <div className="h-6 mb-2" key={year}>
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={visibleYears[year]}
-                    onChange={() => handleYearToggle(year)}
-                    className="mr-1"
-                  />
-                  <span style={{ color: yearAndColors[year] }}>{year}年</span>
-                </label>
+              <div className="mb-2" key={year}>
+                <button
+                  className="btn btn-sm text-white"
+                  onClick={() => handleYearToggle(year)}
+                  style={{
+                    backgroundColor: visibleYears[year]
+                      ? yearAndColors[year]
+                      : '#6c757d',
+                  }}
+                >
+                  {year}年
+                </button>
               </div>
             ))}
           </div>
