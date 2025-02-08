@@ -4,7 +4,6 @@ import {
   Line,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
   Legend,
   ResponsiveContainer,
@@ -39,14 +38,20 @@ const WeatherDataChart = ({
               )}
               <ResponsiveContainer width="100%" height={400}>
                 <LineChart data={combinedData}>
-                  <CartesianGrid strokeDasharray="3 3" />
                   <XAxis
                     dataKey="date"
                     ticks={ticks}
                     domain={['01-01', '12-31']}
                     allowDataOverflow={true}
+                    tick={!loading} // ローディング中はX軸の値を非表示
+                    axisLine={true}
                   />
-                  <YAxis unit={unit} domain={yAxisDomain} />
+                  <YAxis
+                    unit={unit}
+                    domain={yAxisDomain}
+                    tick={!loading} // ローディング中はY軸の値を非表示
+                    axisLine={true}
+                  />
                   <Tooltip />
                   <Legend />
                   {filteredYears.map((year) => (
