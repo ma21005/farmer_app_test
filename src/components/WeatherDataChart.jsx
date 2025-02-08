@@ -22,37 +22,46 @@ const WeatherDataChart = ({
   handleYearToggle,
   yAxisDomain,
   unit,
+  loading,
 }) => {
   return (
-    <div className="w-auto max-w-full border-2 mr-4 ml-5 mt-4 mb-4 rounded-xl bg-white shadow-md">
+    <div className="relative w-auto max-w-full border-2 mr-4 ml-5 mt-4 mb-4 rounded-xl bg-white shadow-md">
       <div className="m-3">
         <h1 className="font-bold m-2 text-2xl">{title}</h1>
         <div className="w-full flex justify-between items-start">
           <div className="w-[95%]">
-            <ResponsiveContainer width="100%" height={400}>
-              <LineChart data={combinedData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis
-                  dataKey="date"
-                  ticks={ticks}
-                  domain={['01-01', '12-31']}
-                  allowDataOverflow={true}
-                />
-                <YAxis unit={unit} domain={yAxisDomain} />
-                <Tooltip />
-                <Legend />
-                {filteredYears.map((year) => (
-                  <Line
-                    key={year}
-                    type="monotone"
-                    dataKey={`${dataKeyPrefix}${year}`}
-                    name={`${year}年`}
-                    dot={false}
-                    stroke={yearAndColors[year]}
+            <div className="relative w-full h-[400px]">
+              {/* ローディングアニメーション */}
+              {loading && (
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-600 bg-opacity-30 z-10">
+                  <i className="fas fa-2x fa-sync-alt fa-spin"></i>
+                </div>
+              )}
+              <ResponsiveContainer width="100%" height={400}>
+                <LineChart data={combinedData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis
+                    dataKey="date"
+                    ticks={ticks}
+                    domain={['01-01', '12-31']}
+                    allowDataOverflow={true}
                   />
-                ))}
-              </LineChart>
-            </ResponsiveContainer>
+                  <YAxis unit={unit} domain={yAxisDomain} />
+                  <Tooltip />
+                  <Legend />
+                  {filteredYears.map((year) => (
+                    <Line
+                      key={year}
+                      type="monotone"
+                      dataKey={`${dataKeyPrefix}${year}`}
+                      name={`${year}年`}
+                      dot={false}
+                      stroke={yearAndColors[year]}
+                    />
+                  ))}
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
           </div>
           <div className="w-[9%] 2xl:w-[6%] flex flex-col items-center">
             {years.map((year) => (

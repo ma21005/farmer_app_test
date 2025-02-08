@@ -73,10 +73,6 @@ const WeatherPage = () => {
     loadData();
   }, [years]);
 
-  if (loading) {
-    return <div>データを読み込み中...</div>;
-  }
-
   // 各月の1日を生成（MM-DD形式）
   const getMonthlyTicks = () => {
     const months = [
@@ -223,6 +219,7 @@ const WeatherPage = () => {
           handleYearToggle={handleYearToggle}
           yAxisDomain={chart.yAxisDomain}
           unit={chart.unit}
+          loading={loading}
         />
       ))}
       <div className="w-full flex justify-center mb-8">
