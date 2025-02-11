@@ -58,14 +58,17 @@ function WeatherDashboard() {
         <div className="d-flex">
           {Object.keys(weatherData).map((date, index) => (
             <div key={index} className="card m-2 elevation-2">
-              <div className="card-body">
+              <div className="card-body table-responsive">
                 <h5 className="card-title text-center">{date}</h5>
                 <table className="table table-bordered border-top text-center">
                   <thead>
                     <tr>
                       <th className="bg-info w-16 2xl:w-32">時間</th>
                       {weatherData[date].map((item, idx) => (
-                        <th className="w-12 2xl:w-16" key={idx}>
+                        <th
+                          className="text-center align-middle w-12 2xl:w-16"
+                          key={idx}
+                        >
                           {parseInt(
                             item['日時'].split(' ')[1].split(':')[0],
                             10
@@ -91,7 +94,7 @@ function WeatherDashboard() {
                     <tr>
                       <th className="bg-info">気温 (℃)</th>
                       {weatherData[date].map((item, idx) => (
-                        <td key={idx}>
+                        <td className="p-0 text-center align-middle" key={idx}>
                           {Math.trunc(parseFloat(item['気温 (℃)']) * 10) / 10}
                         </td>
                       ))}
@@ -99,13 +102,15 @@ function WeatherDashboard() {
                     <tr>
                       <th className="bg-info">湿度 (%)</th>
                       {weatherData[date].map((item, idx) => (
-                        <td key={idx}>{item['湿度 (%)']}</td>
+                        <td className="p-0 text-center align-middle" key={idx}>
+                          {item['湿度 (%)']}
+                        </td>
                       ))}
                     </tr>
                     <tr>
                       <th className="bg-info">風速 (m/s)</th>
                       {weatherData[date].map((item, idx) => (
-                        <td key={idx}>
+                        <td className="p-0 text-center align-middle" key={idx}>
                           {Math.trunc(parseFloat(item['風速 (m/s)']) * 10) / 10}
                         </td>
                       ))}
@@ -113,7 +118,7 @@ function WeatherDashboard() {
                     <tr>
                       <th className="bg-info">降水量 (mm)</th>
                       {weatherData[date].map((item, idx) => (
-                        <td key={idx}>
+                        <td className="p-0 text-center align-middle" key={idx}>
                           {Math.trunc(parseFloat(item['降水量 (mm)']) * 10) /
                             10}
                         </td>
