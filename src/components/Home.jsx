@@ -17,7 +17,40 @@ const weatherIcons = {
 };
 
 function WeatherDashboard() {
-  const [weatherData, setWeatherData] = useState({});
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}/${month}/${day}`;
+  };
+
+  // APIの気象データを取得できるまでの間にローディングアニメーションを出すための空データ
+  const [weatherData, setWeatherData] = useState({
+    [formatDate(today)]: [
+      { 日時: `${formatDate(today)} 0:00:00` },
+      { 日時: `${formatDate(today)} 3:00:00` },
+      { 日時: `${formatDate(today)} 6:00:00` },
+      { 日時: `${formatDate(today)} 9:00:00` },
+      { 日時: `${formatDate(today)} 12:00:00` },
+      { 日時: `${formatDate(today)} 15:00:00` },
+      { 日時: `${formatDate(today)} 18:00:00` },
+      { 日時: `${formatDate(today)} 21:00:00` },
+    ],
+    [formatDate(tomorrow)]: [
+      { 日時: `${formatDate(tomorrow)} 0:00:00` },
+      { 日時: `${formatDate(tomorrow)} 3:00:00` },
+      { 日時: `${formatDate(tomorrow)} 6:00:00` },
+      { 日時: `${formatDate(tomorrow)} 9:00:00` },
+      { 日時: `${formatDate(tomorrow)} 12:00:00` },
+      { 日時: `${formatDate(tomorrow)} 15:00:00` },
+      { 日時: `${formatDate(tomorrow)} 18:00:00` },
+      { 日時: `${formatDate(tomorrow)} 21:00:00` },
+    ],
+  });
   const [loading, setLoading] = useState(true);
   const API_URL =
     'https://script.google.com/macros/s/AKfycbzPQmWRYosRKunZCmt_LoD8ZCOfRUGCQOGFZvhxT9-hh3Y52um9jd0aK2N5842ZL6ZXAA/exec';

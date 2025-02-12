@@ -36,7 +36,9 @@ const WeatherForecast = ({ date, weatherData, weatherIcons, loading }) => (
               <th className="bg-info">気温 (℃)</th>
               {weatherData.map((item, idx) => (
                 <td className="p-0 text-center align-middle" key={idx}>
-                  {Math.trunc(parseFloat(item['気温 (℃)']) * 10) / 10}
+                  {loading
+                    ? ''
+                    : Math.trunc(parseFloat(item['気温 (℃)']) * 10) / 10}
                 </td>
               ))}
             </tr>
@@ -52,7 +54,9 @@ const WeatherForecast = ({ date, weatherData, weatherIcons, loading }) => (
               <th className="bg-info">風速 (m/s)</th>
               {weatherData.map((item, idx) => (
                 <td className="p-0 text-center align-middle" key={idx}>
-                  {Math.trunc(parseFloat(item['風速 (m/s)']) * 10) / 10}
+                  {loading
+                    ? ''
+                    : Math.trunc(parseFloat(item['風速 (m/s)']) * 10) / 10}
                 </td>
               ))}
             </tr>
@@ -60,7 +64,9 @@ const WeatherForecast = ({ date, weatherData, weatherIcons, loading }) => (
               <th className="bg-info">降水量 (mm)</th>
               {weatherData.map((item, idx) => (
                 <td className="p-0 text-center align-middle" key={idx}>
-                  {Math.trunc(parseFloat(item['降水量 (mm)']) * 10) / 10}
+                  {loading
+                    ? ''
+                    : Math.trunc(parseFloat(item['降水量 (mm)']) * 10) / 10}
                 </td>
               ))}
             </tr>
