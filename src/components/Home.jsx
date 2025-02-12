@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import WeatherForecast from './WeatherForecast';
 import 'admin-lte/dist/css/adminlte.min.css';
 
 // 天気に対応するアイコン画像のパスを設定
@@ -17,7 +18,7 @@ const weatherIcons = {
 
 function WeatherDashboard() {
   const [weatherData, setWeatherData] = useState({});
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const API_URL =
     'https://script.google.com/macros/s/AKfycbzPQmWRYosRKunZCmt_LoD8ZCOfRUGCQOGFZvhxT9-hh3Y52um9jd0aK2N5842ZL6ZXAA/exec';
 
@@ -44,11 +45,10 @@ function WeatherDashboard() {
           return acc;
         }, {});
         setWeatherData(groupedData);
-        // setLoading(false);
+        setLoading(false);
       })
       .catch((error) => {
         console.error('データ取得エラー:', error);
-        // setLoading(false);
       });
   }, []);
 
@@ -57,77 +57,13 @@ function WeatherDashboard() {
       <div className="weather-container">
         <div className="d-flex justify-content-center">
           {Object.keys(weatherData).map((date, index) => (
-            <div key={index} className="card mt-12 elevation-2 mx-8">
-              <div className="card-body table-responsive">
-                <p className="font-bold text-lg mb-2">{date}</p>
-                <table className="table table-bordered border-top text-center">
-                  <thead>
-                    <tr>
-                      <th className="bg-info w-16 2xl:w-32">時間</th>
-                      {weatherData[date].map((item, idx) => (
-                        <th
-                          className="text-center align-middle w-12 2xl:w-16"
-                          key={idx}
-                        >
-                          {parseInt(
-                            item['日時'].split(' ')[1].split(':')[0],
-                            10
-                          )}
-                          時
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th className="bg-info">天気</th>
-                      {weatherData[date].map((item, idx) => (
-                        <td className="p-0 text-center align-middle" key={idx}>
-                          <img
-                            src={weatherIcons[item['天気']]}
-                            alt={item['天気']}
-                            className="w-100"
-                          />
-                        </td>
-                      ))}
-                    </tr>
-                    <tr>
-                      <th className="bg-info">気温 (℃)</th>
-                      {weatherData[date].map((item, idx) => (
-                        <td className="p-0 text-center align-middle" key={idx}>
-                          {Math.trunc(parseFloat(item['気温 (℃)']) * 10) / 10}
-                        </td>
-                      ))}
-                    </tr>
-                    <tr>
-                      <th className="bg-info">湿度 (%)</th>
-                      {weatherData[date].map((item, idx) => (
-                        <td className="p-0 text-center align-middle" key={idx}>
-                          {item['湿度 (%)']}
-                        </td>
-                      ))}
-                    </tr>
-                    <tr>
-                      <th className="bg-info">風速 (m/s)</th>
-                      {weatherData[date].map((item, idx) => (
-                        <td className="p-0 text-center align-middle" key={idx}>
-                          {Math.trunc(parseFloat(item['風速 (m/s)']) * 10) / 10}
-                        </td>
-                      ))}
-                    </tr>
-                    <tr>
-                      <th className="bg-info">降水量 (mm)</th>
-                      {weatherData[date].map((item, idx) => (
-                        <td className="p-0 text-center align-middle" key={idx}>
-                          {Math.trunc(parseFloat(item['降水量 (mm)']) * 10) /
-                            10}
-                        </td>
-                      ))}
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            <WeatherForecast
+              key={index}
+              date={date}
+              weatherData={weatherData[date]}
+              weatherIcons={weatherIcons}
+              loading={loading}
+            />
           ))}
         </div>
       </div>
