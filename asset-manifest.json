@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/farmer_app_test/static/css/main.c5280364.css",
-    "main.js": "/farmer_app_test/static/js/main.7a72a84c.js",
+    "main.css": "/farmer_app_test/static/css/main.5a746d81.css",
+    "main.js": "/farmer_app_test/static/js/main.191d5127.js",
     "static/js/488.9e6ea7b4.chunk.js": "/farmer_app_test/static/js/488.9e6ea7b4.chunk.js",
     "static/media/fa-solid-900.ttf": "/farmer_app_test/static/media/fa-solid-900.2582b0e4bcf85eceead0.ttf",
     "static/media/fa-brands-400.ttf": "/farmer_app_test/static/media/fa-brands-400.1815e00441357e01619e.ttf",
@@ -12,12 +12,12 @@
     "static/media/fa-v4compatibility.ttf": "/farmer_app_test/static/media/fa-v4compatibility.da94ef451f4969af06e6.ttf",
     "static/media/fa-v4compatibility.woff2": "/farmer_app_test/static/media/fa-v4compatibility.ea8f94e1d22e0d35ccd4.woff2",
     "index.html": "/farmer_app_test/index.html",
-    "main.c5280364.css.map": "/farmer_app_test/static/css/main.c5280364.css.map",
-    "main.7a72a84c.js.map": "/farmer_app_test/static/js/main.7a72a84c.js.map",
+    "main.5a746d81.css.map": "/farmer_app_test/static/css/main.5a746d81.css.map",
+    "main.191d5127.js.map": "/farmer_app_test/static/js/main.191d5127.js.map",
     "488.9e6ea7b4.chunk.js.map": "/farmer_app_test/static/js/488.9e6ea7b4.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c5280364.css",
-    "static/js/main.7a72a84c.js"
+    "static/css/main.5a746d81.css",
+    "static/js/main.191d5127.js"
   ]
 }
