@@ -55,11 +55,11 @@ function WeatherDashboard() {
   return (
     <div className="w-full">
       <div className="weather-container">
-        <div className="d-flex">
+        <div className="d-flex justify-content-center">
           {Object.keys(weatherData).map((date, index) => (
-            <div key={index} className="card m-2 elevation-2">
+            <div key={index} className="card mt-12 elevation-2 mx-8">
               <div className="card-body table-responsive">
-                <h5 className="card-title text-center">{date}</h5>
+                <p className="font-bold text-lg mb-2">{date}</p>
                 <table className="table table-bordered border-top text-center">
                   <thead>
                     <tr>
