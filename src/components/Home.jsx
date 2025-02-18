@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import WeatherForecast from './WeatherForecast';
+import AiMessage from './AiMessage';
 import 'admin-lte/dist/css/adminlte.min.css';
 
 // 天気に対応するアイコン画像のパスを設定
@@ -14,6 +15,7 @@ const weatherIcons = {
   適度な雨: '/farmer_app_test/img/weather/雨.png',
   // : '/farmer_app_test/img/weather/大雨.png',
   小雪: '/farmer_app_test/img/weather/雪.png',
+  雪: '/farmer_app_test/img/weather/吹雪.png',
 };
 
 function WeatherDashboard() {
@@ -86,19 +88,21 @@ function WeatherDashboard() {
   }, []);
 
   return (
-    <div className="w-full">
-      <div className="weather-container">
-        <div className="d-flex justify-content-center">
-          {Object.keys(weatherData).map((date, index) => (
-            <WeatherForecast
-              key={index}
-              date={date}
-              weatherData={weatherData[date]}
-              weatherIcons={weatherIcons}
-              loading={loading}
-            />
-          ))}
-        </div>
+    <div className="w-full pr-24 pl-24">
+      <div className="weather-container d-flex justify-content-center gap-10">
+        {Object.keys(weatherData).map((date, index) => (
+          <WeatherForecast
+            key={index}
+            date={date}
+            weatherData={weatherData[date]}
+            weatherIcons={weatherIcons}
+            loading={loading}
+          />
+        ))}
+      </div>
+
+      <div className="ai-message-container mt-4">
+        <AiMessage />
       </div>
     </div>
   );
