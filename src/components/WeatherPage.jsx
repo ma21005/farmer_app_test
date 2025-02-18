@@ -27,6 +27,9 @@ const WeatherPage = () => {
     }, {})
   );
 
+  const [filteredData, setFilteredData] = useState([]); // フィルタ済みデータ
+  const [selectedRange, setSelectedRange] = useState('01-12'); // デフォルトで1~12月を選択
+
   // APIからデータを取得する関数
   const fetchWeatherData = async (year) => {
     const url = `https://script.google.com/macros/s/AKfycbwDIkUlnKy0XuSiMPDEEzMJ8i2SN-Zp8CuRF8Hz6KP2ftFIRNDHUcjgoX7Foo4xMCE04Q/exec?year=${year}`;
@@ -73,7 +76,7 @@ const WeatherPage = () => {
 
   // 各月の1日を生成（MM-DD形式）
   const getMonthlyTicks = () => {
-    const months = [
+    return [
       '01',
       '02',
       '03',
@@ -86,32 +89,47 @@ const WeatherPage = () => {
       '10',
       '11',
       '12',
-    ];
-    return months.map((month) => `${month}-01`);
+    ].map((month) => `${month}-01`);
   };
 
   const ticks = getMonthlyTicks();
 
-  const combinedData =
-    data[years[0]]?.map((d, i) => {
-      const entry = { date: d.date };
-      years.forEach((year) => {
-        entry[`avgTemp${year}`] = data[year]?.[i]?.avgTemp;
-        entry[`maxTemp${year}`] = data[year]?.[i]?.maxTemp;
-        entry[`minTemp${year}`] = data[year]?.[i]?.minTemp;
-        entry[`avgHumidity${year}`] = data[year]?.[i]?.avgHumidity;
-        entry[`precipitation${year}`] = data[year]?.[i]?.precipitation;
-        entry[`maxPrecipitation${year}`] = data[year]?.[i]?.maxPrecipitation;
-        entry[`avgWindSpeed${year}`] = data[year]?.[i]?.avgWindSpeed;
-        entry[`maxWindSpeed${year}`] = data[year]?.[i]?.maxWindSpeed;
-        entry[`maxGustSpeed${year}`] = data[year]?.[i]?.maxGustSpeed;
-        entry[`avgVaporPressure${year}`] = data[year]?.[i]?.avgVaporPressure;
-        entry[`sunshineHours${year}`] = data[year]?.[i]?.sunshineHours;
-        entry[`totalSnowfall${year}`] = data[year]?.[i]?.totalSnowfall;
-        entry[`maxSnowDepth${year}`] = data[year]?.[i]?.maxSnowDepth;
-      });
-      return entry;
-    }) || [];
+  const combinedData = useMemo(() => {
+    return (
+      data[years[0]]?.map((d, i) => {
+        const entry = { date: d.date };
+        years.forEach((year) => {
+          entry[`avgTemp${year}`] = data[year]?.[i]?.avgTemp;
+          entry[`maxTemp${year}`] = data[year]?.[i]?.maxTemp;
+          entry[`minTemp${year}`] = data[year]?.[i]?.minTemp;
+          entry[`avgHumidity${year}`] = data[year]?.[i]?.avgHumidity;
+          entry[`precipitation${year}`] = data[year]?.[i]?.precipitation;
+          entry[`maxPrecipitation${year}`] = data[year]?.[i]?.maxPrecipitation;
+          entry[`avgWindSpeed${year}`] = data[year]?.[i]?.avgWindSpeed;
+          entry[`maxWindSpeed${year}`] = data[year]?.[i]?.maxWindSpeed;
+          entry[`maxGustSpeed${year}`] = data[year]?.[i]?.maxGustSpeed;
+          entry[`avgVaporPressure${year}`] = data[year]?.[i]?.avgVaporPressure;
+          entry[`sunshineHours${year}`] = data[year]?.[i]?.sunshineHours;
+          entry[`totalSnowfall${year}`] = data[year]?.[i]?.totalSnowfall;
+          entry[`maxSnowDepth${year}`] = data[year]?.[i]?.maxSnowDepth;
+        });
+        return entry;
+      }) || []
+    );
+  }, [data, years]);
+
+  useEffect(() => {
+    setFilteredData(combinedData);
+  }, [combinedData]);
+
+  const filterDataByMonthRange = (startMonth, endMonth) => {
+    setSelectedRange(`${startMonth}-${endMonth}`);
+    const filtered = combinedData.filter((entry) => {
+      const month = entry.date.slice(0, 2);
+      return month >= startMonth && month <= endMonth;
+    });
+    setFilteredData(filtered);
+  };
 
   const handleYearToggle = (year) => {
     setVisibleYears((prev) => ({
@@ -208,14 +226,15 @@ const WeatherPage = () => {
           key={index}
           title={chart.title}
           dataKeyPrefix={chart.dataKeyPrefix}
-          combinedData={combinedData}
+          combinedData={filteredData} // フィルタ済みのデータを渡す
           ticks={ticks}
           filteredYears={filteredYears}
           yearAndColors={yearAndColors}
           years={years}
           visibleYears={visibleYears}
           handleYearToggle={handleYearToggle}
-          yAxisDomain={chart.yAxisDomain}
+          selectedRange={selectedRange}
+          filterDataByMonthRange={filterDataByMonthRange}
           unit={chart.unit}
           loading={loading}
         />

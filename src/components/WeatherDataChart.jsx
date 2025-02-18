@@ -21,6 +21,8 @@ const WeatherDataChart = ({
   yAxisDomain,
   unit,
   loading,
+  selectedRange,
+  filterDataByMonthRange,
 }) => {
   return (
     <div className="card card-info elevation-2 relative w-auto max-w-full border-2 mr-4 ml-5 mt-4 mb-4">
@@ -32,18 +34,27 @@ const WeatherDataChart = ({
           className="btn-group rounded-md ml-auto border-2 border-[#148CA0]"
           role="group"
         >
-          <button type="button" className="btn btn-info">
-            1 ~ 12月
-          </button>
-          <button type="button" className="btn btn-info">
-            1 ~ 4月
-          </button>
-          <button type="button" className="btn btn-info">
-            5 ~ 8月
-          </button>
-          <button type="button" className="btn btn-info">
-            9 ~ 12月
-          </button>
+          {[
+            { label: '1 ~ 12月', range: '01-12' },
+            { label: '1 ~ 4月', range: '01-04' },
+            { label: '5 ~ 8月', range: '05-08' },
+            { label: '9 ~ 12月', range: '09-12' },
+          ].map(({ label, range }) => (
+            <button
+              key={range}
+              type="button"
+              className={`btn btn-info`}
+              style={{
+                backgroundColor: selectedRange === range ? '#148CA0' : '',
+                border: 'none',
+              }}
+              onClick={() =>
+                filterDataByMonthRange(range.split('-')[0], range.split('-')[1])
+              }
+            >
+              {label}
+            </button>
+          ))}
         </div>
       </div>
 
