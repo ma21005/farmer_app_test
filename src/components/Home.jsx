@@ -10,6 +10,7 @@ const weatherIcons = {
   // : '/farmer_app_test/img/weather/快晴.png',
   雲: '/farmer_app_test/img/weather/曇り.png',
   曇りがち: '/farmer_app_test/img/weather/曇り.png',
+  薄い雲: '/farmer_app_test/img/weather/曇り雲.png',
   厚い雲: '/farmer_app_test/img/weather/厚い雲.png',
   小雨: '/farmer_app_test/img/weather/小雨.png',
   適度な雨: '/farmer_app_test/img/weather/雨.png',
