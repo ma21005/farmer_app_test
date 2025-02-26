@@ -32,7 +32,7 @@ const WeatherPage = () => {
 
   // APIからデータを取得する関数
   const fetchWeatherData = async (year) => {
-    const url = `https://script.google.com/macros/s/AKfycbwDIkUlnKy0XuSiMPDEEzMJ8i2SN-Zp8CuRF8Hz6KP2ftFIRNDHUcjgoX7Foo4xMCE04Q/exec?year=${year}`;
+    const url = `https://script.google.com/macros/s/AKfycbwJ-Ii1X9BX1ufLiMmsDQHJuFfyuj9p6XSt6xHcPC9Pts9cuLdz7AygnJ6GNBqMo7VhUA/exec?year=${year}`;
     const response = await axios.get(url);
     return response.data
       .filter((entry) => entry['年月日'].slice(5) !== '02-29') // 他の年のデータとの整合性を取るために2024/02/29を除外
