@@ -2,8 +2,11 @@ import React from 'react';
 
 const WeatherForecast = ({ date, weatherData, weatherIcons, loading }) => (
   <>
-    <div key={date} className="card card-info mt-12 elevation-2 w-full">
-      <div className="card-header">
+    <div key={date} className="card mt-12 elevation-2 w-full">
+      <div
+        className="card-header"
+        style={{ backgroundColor: '#209e91', color: '#ffffff' }}
+      >
         <h1 className="font-bold text-lg m-0">{date}</h1>
       </div>
       <div className="card-body table-responsive">
@@ -11,7 +14,9 @@ const WeatherForecast = ({ date, weatherData, weatherIcons, loading }) => (
         <table className="table table-bordered border-top text-center">
           <thead>
             <tr>
-              <th className="bg-secondary w-16 2xl:w-32">時間</th>
+              <th className="bg-[#1f2937] text-white font-medium w-16 2xl:w-32">
+                時間
+              </th>
               {weatherData.map((item, idx) => (
                 <th
                   className="text-center align-middle w-12 2xl:w-16 text-gray-600"
@@ -24,7 +29,7 @@ const WeatherForecast = ({ date, weatherData, weatherIcons, loading }) => (
           </thead>
           <tbody>
             <tr>
-              <th className="bg-secondary">天気</th>
+              <th className="bg-[#1f2937] text-white font-medium">天気</th>
               {weatherData.map((item, idx) => (
                 <td className="p-0 text-center align-middle" key={idx}>
                   <img
@@ -36,7 +41,7 @@ const WeatherForecast = ({ date, weatherData, weatherIcons, loading }) => (
               ))}
             </tr>
             <tr>
-              <th className="bg-secondary">気温 (℃)</th>
+              <th className="bg-[#1f2937] text-white font-medium">気温 (℃)</th>
               {weatherData.map((item, idx) => {
                 const temperature = loading
                   ? null
@@ -54,7 +59,7 @@ const WeatherForecast = ({ date, weatherData, weatherIcons, loading }) => (
               })}
             </tr>
             <tr>
-              <th className="bg-secondary">湿度 (%)</th>
+              <th className="bg-[#1f2937] text-white font-medium">湿度 (%)</th>
               {weatherData.map((item, idx) => {
                 const humidity = loading
                   ? null
@@ -72,7 +77,9 @@ const WeatherForecast = ({ date, weatherData, weatherIcons, loading }) => (
               })}
             </tr>
             <tr>
-              <th className="bg-secondary">風速 (m/s)</th>
+              <th className="bg-[#1f2937] text-white font-medium">
+                風速 (m/s)
+              </th>
               {weatherData.map((item, idx) => {
                 const windSpeed = loading
                   ? null
@@ -91,7 +98,9 @@ const WeatherForecast = ({ date, weatherData, weatherIcons, loading }) => (
             </tr>
 
             <tr>
-              <th className="bg-secondary">降水量 (mm)</th>
+              <th className="bg-[#1f2937] text-white font-medium">
+                降水量 (mm)
+              </th>
               {weatherData.map((item, idx) => (
                 <td
                   className="p-0 text-center align-middle font-bold text-gray-500"

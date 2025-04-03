@@ -1,7 +1,10 @@
 const AiMessage = () => {
   return (
-    <div className="card card-info elevation-2">
-      <div className="card-header">
+    <div className="card elevation-2">
+      <div
+        className="card-header"
+        style={{ backgroundColor: '#209e91', color: '#ffffff' }}
+      >
         <h1 className="font-bold text-lg m-0">ADVICE</h1>
       </div>
       <div className="card-body">
