@@ -19,7 +19,7 @@ const WeatherForecast = ({ date, weatherData, weatherIcons, loading }) => (
               </th>
               {weatherData.map((item, idx) => (
                 <th
-                  className="text-center align-middle w-12 2xl:w-16 text-gray-600"
+                  className="text-center align-middle font-medium w-12 2xl:w-16 bg-[#1f2937] text-white"
                   key={idx}
                 >
                   {parseInt(item['日時'].split(' ')[1].split(':')[0], 10)}時
